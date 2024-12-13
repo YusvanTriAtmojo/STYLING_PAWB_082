@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body style="padding: 0px !important;">
+	<div class="container d-flex justify-content-center align-items-center vh-100">
+		<form action="<%= url %>login/auth" method="POST" class="glass-card">
+			<img src="/images/poke.png" alt="pokeball" style="width: 100px; display: block; margin: 0 auto;">
+			<h2>Login</h2>
+			<p>Login dulu ya!</p>
+			<div class="form-group mb-3">
+				<label>Email:</label>
+				<input type="email" name="email" class="form-control" placeholder="Masukan email" required>
+			</div>
+			<div class="form-group mb-4">
+				<label>Password:</label>
+				<input type="password" name="pass" class="form-control" placeholder="Masukan password" required>
+			</div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+			<p>Belum punya akun, Registrasi dulu yuk ! </p>
+			<a href="<%= url %>register" class="btn btn-outline-success w-100">Register</a>
+				
+			<%if (pesanFlash) { %>
+				<div class="alert alert-<%= colorFlash %> alert-dismissible fade show mt-3" role="alert">
+					<strong><%= statusFlash %></strong> 
+					<%= pesanFlash %>
+				</div>
+			<% } %>
+		</form>
+	</div>  
+</body>
+</html>

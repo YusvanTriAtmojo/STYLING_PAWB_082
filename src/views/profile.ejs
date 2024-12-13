@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <img src="/images/poke.png" alt="pokeball" style="width: 50px; padding-left: 10px;">
+                <a class="navbar-brand" href="<%= url %>">Pokedex</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto justify-content-center" style="padding-left: 120px;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<%= url %>">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="<%= url %>profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<%= url %>pokemon">Pokemon</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto" style="padding-left: 80px;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="logoutDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= userName %>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="logoutDropdown">
+                                <li><a class="dropdown-item" href="<%= url %>login/logout">Confirm Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>   
+        <section class="mt-4 pb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h5>Data Profil, <b style="color: #de1558;">
+                                    <%= userName %></b></h5>
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">Nama:</label>
+                                    <input type="text" value="<%= nama %>" name="pass" class="form-control" disabled style="background-color: #242440;color: white;">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">Email:</label>
+                                    <input type="text" value="<%= email %>" name="pass" class="form-control" disabled style="background-color: #242440;color: white;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>      
+        <footer>
+            <div class="footer-left"></div>
+                <img src="/images/poke.png" alt="Logo" class="footer-logo">
+            </div>
+            <div class="footer-center">
+                <a href="<%= url %>">Home</a><br>
+                <a href="<%= url %>profile">Profile</a><br>
+                <a href="<%= url %>pokemon">Pokemon</a><br>
+            </div>
+            <div class="footer-right">
+                
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/pokemonofficial.id/" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://twitter.com/pokemon" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://www.youtube.com/c/PokemonIndonesia" target="_blank"><i class="fab fa-youtube fa-2x"></i></a>
+                 </div>
+            </div>
+        </footer>  
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+</html>

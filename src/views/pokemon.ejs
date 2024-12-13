@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pokemon</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <img src="/images/poke.png" alt="pokeball" style="width: 50px; padding-left: 10px;">
+                <a class="navbar-brand" href="<%= url %>">Pokedex</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto justify-content-center" style="padding-right: 200px;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<%= url %>">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<%= url %>profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="<%= url %>pokemon">Pokemon</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>    
+
+        <div class="container mt-5 pt-5" style="margin-bottom: 200px;">
+            <div clas="atas" style="text-align: center;">
+                <h1>Pokedex</h1> <br> <br>
+                <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#tambahDataModal">
+                    Tambah Data
+                </button> <br> <br>
+            </div>
+            <div class="card">
+                <div class="card-header" style="color: white; text-align: center; background-color:#3c1a5c">
+                    <b>Daftar Pokemon</b>
+                </div>
+                <div class="card-body">
+                    <% if (pokemons.length > 0) { %>
+                        <div class="row">
+                            <% pokemons.forEach(pokemon => { %>
+                                <!-- Card kecil untuk setiap data -->
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body" style="background-color: #3c1a5c;">
+                                            <h5 class="card-title" style="text-align: center; color:#dd2a66 ;"><b><%= pokemon.name %></b></h5>
+                                            <p class="card-text">
+                                                <strong>Type  :</strong> <%= pokemon.type %><br>
+                                                <strong>Abilitie  :</strong> <%= pokemon.abilitie %><br>
+                                                <strong>Attack:</strong> <%= pokemon.attack %>
+                                            </p>
+                                        </div>
+                                        <div class="card-footer" style="text-align: center;">
+                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"  data-bs-target="#editDataModal<%= pokemon.id %>">Edit</button>
+
+                                            <a href="<%= url + 'pokemon/delete/' + pokemon.id %>" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <p class="text-center">No Data</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel"><b>Tambah Pokemon</b></h5>
+                        <button type="button" class="btn-close-custom" data-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="<%= url + 'pokemon/save' %>" method="POST">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Masukan nama" required>
+                            </div> <br>
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <input type="text" class="form-control" id="type" name="type" placeholder="Masukan type" required>
+                            </div> <br>
+                            <div class="form-group">
+                                <label for="abilitie">Abilitie</label>
+                                <input type="text" class="form-control" id="abilitie" name="abilitie" placeholder="Masukan abilitie" required>
+                            </div> <br>
+                            <div class="form-group">
+                                <label for="attack">Attack</label>
+                                <textarea class="form-control" id="attack" name="attack" rows="3" placeholder="Masukan Attack" required></textarea>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% pokemons.forEach(pokemon => { %>
+            <div class="modal fade" id="editDataModal<%= pokemon.id %>" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel"><b>Edit Pokemon</b></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<%= url + 'pokemon/update/' + pokemon.id %>" method="POST">
+                                <div class="form-group">
+                                    <label for="name">Nama</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="<%= pokemon.name %>" required>
+                                </div> <br>
+                                <div class="form-group">
+                                    <label for="type">Type</label>
+                                    <input type="text" class="form-control" id="type" name="type" value="<%= pokemon.type %>" required>
+                                </div> <br>
+                                <div class="form-group">
+                                    <label for="abilitie">Abilities</label>
+                                    <input type="text" class="form-control" id="abilitie" name="abilitie" value="<%= pokemon.abilitie %>" required>
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="attack">Attack</label>
+                                    <textarea class="form-control" id="attack" name="attack" rows="3" required><%= pokemon.attack %></textarea>
+                                </div> 
+                                <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+
+        <footer>
+            <div class="footer-left"></div>
+                <img src="/images/poke.png" alt="Logo" class="footer-logo">
+            </div>
+            <div class="footer-center">
+                <a href="<%= url %>">Home</a><br>
+                <a href="<%= url %>profile">Profile</a><br>
+                <a href="<%= url %>pokemon">Pokemon</a><br>
+            </div>
+            <div class="footer-right">
+                
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/pokemonofficial.id/" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://twitter.com/pokemon" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://www.youtube.com/c/PokemonIndonesia" target="_blank"><i class="fab fa-youtube fa-2x"></i></a>
+                 </div>
+            </div>
+        </footer> 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    </body>
+</html>
